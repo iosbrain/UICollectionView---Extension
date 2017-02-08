@@ -95,16 +95,29 @@ class ViewController: UIViewController
     // MARK: - Helper methods
     
     /**
-     Allows you to quickly add three cells to the collection view's
-     data source.
-     */
-    func reloadCollectionViewData() -> Void
+     Allows you to quickly add a specified number of items to the collection view's
+     data source, and thus add the items as cells to the collection view.
+     
+     - parameter numberOfCells: The number of items representing UICollectionViewCells 
+     to create in your data source.
+     
+     - returns: The number of items created in the data source, and thus number
+     of cells created.
+    */
+    func reloadCollectionViewData(numberOfCells: Int) -> Int
     {
         if collectionViewDataSource.count == 0
         {
-            collectionViewDataSource.append(0)
-            collectionViewDataSource.append(1)
-            collectionViewDataSource.append(2)
+            for i in 0...(numberOfCells-1)
+            {
+                collectionViewDataSource.append(i)
+            }
+            
+            return numberOfCells;
+        }
+        else
+        {
+            return 0;
         }
     }
     
@@ -214,7 +227,7 @@ class ViewController: UIViewController
     {
         if self.collectionViewDataSource.count == 0
         {
-            self.reloadCollectionViewData()
+            self.reloadCollectionViewData(numberOfCells: 3)
             self.collectionView.reloadData()
         }
     }
